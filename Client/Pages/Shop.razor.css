@@ -19,4 +19,12 @@
     .divider {
         display: block !important;
     }
+
+    .w-100-mobile {
+        width: 100%!important;
+    }
+    .banner-mobile {
+        height: 211px;
+        width: auto !important;
+    }
 }

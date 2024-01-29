@@ -82,7 +82,9 @@
     padding: 9px;
     font-family: 'POPPINS';
     font-weight: 500;
-    font-size: 34px;
+    font-size: 42px;
+    width: 74px;
+    text-align: center;
 }
 
 .countdown {
@@ -97,9 +99,6 @@
         align-items: center;
     }
 
-.count-down {
-    font-size: 24px;
-}
 
 .count-down-caption {
     font-family: Inter;
@@ -184,4 +183,10 @@
 
 .carousel-control-next, .carousel-control-prev {
     opacity: 3 !important;
+}
+
+@media (max-width: 767px) {
+    .review {
+        margin-top: 19px;
+    }
 }
