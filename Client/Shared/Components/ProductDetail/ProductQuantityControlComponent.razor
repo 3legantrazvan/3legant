@@ -1,0 +1,28 @@
+﻿@using System.ComponentModel;
+@using _3legant.Client.ViewModels.Product;
+@using _3legant.Shared.Models;
+@using Interfaces;
+@inject ICartViewModel CartViewModel
+@inherits ComponentBase
+
+<div class="input-group mb-3 control-h">
+    <button class="btn product-quantity-control" type="button" @onclick="@CartViewModel.DecrementQuantity">-</button>
+    <input type="text" class="form-control text-center product-quantity-control" value="@CartViewModel.CartQuantity" readonly />
+    <button class="btn product-quantity-control" type="button" @onclick="@CartViewModel.IncrementQuantity">+</button>
+</div>
+
+@code {
+    [Parameter] public int ProductId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        CartViewModel.PropertyChanged += HandleViewModelPropertyChanged;
+        CartViewModel.ProductId = ProductId;
+        await CartViewModel.GetCartQuantity();
+    }
+
+    private void HandleViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        StateHasChanged();
+    }
+}

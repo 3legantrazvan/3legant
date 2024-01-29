@@ -1,0 +1,42 @@
+﻿@using Interfaces;
+@using System.ComponentModel;
+@using _3legant.Client.ViewModels.Catalog;
+@using _3legant.Shared.Models;
+@inherits ComponentBase
+@inject ISortByViewModel SortByViewModel
+
+<div class="sort-dropdown">
+    <select @onchange="OnSelectedSortChanged" class="form-select sort-by-selection">
+        <option selected>Sort By</option>
+        @foreach (var sortOption in SortByViewModel.SortOptions)
+        {
+            <option value="@sortOption.Value">@sortOption.Text</option>
+        }
+    </select>
+</div>
+
+@code {
+    [Parameter] public string SelectedSort { get; set; }
+    [Parameter] public EventCallback<string> SortChanged { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        SortByViewModel.PropertyChanged += HandleViewModelPropertyChanged;
+        SortByViewModel.Initialize();
+    }
+
+    private async Task OnSelectedSortChanged(ChangeEventArgs e)
+    {
+        SortByViewModel.SelectedSort = e.Value.ToString();
+        SelectedSort = SortByViewModel.SelectedSort;
+        if (SortChanged.HasDelegate)
+        {
+            await SortChanged.InvokeAsync(SelectedSort);
+        }
+    }
+
+    private void HandleViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        StateHasChanged();
+    }
+}

@@ -1,0 +1,67 @@
+﻿@inherits ComponentBase
+@page "/"
+@using System.ComponentModel;
+@using _3legant.Client.Shared.Components.Shop
+@using _3legant.Shared.Models;
+@using global::ViewModels.Catalog;
+@inject ICatalogViewModel CatalogViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="container position-relative text-center justify-content-center">
+            <img src="Images/Shared/Banner.png" alt="Image" class="img-fluid mb-4 w-100">
+            <div class="position-absolute top-50 start-50 translate-middle w-76">
+                <div class="p-4 text-black text-center">
+                    <p class="breadcrumbs">Home > <a href="/" class="text-decoration-none text-black breadcrumbs-active">Shop</a></p>
+                    <h2 class="title-500">Shop Page</h2>
+                    <p class="paragraph">Let's design the place you always imagined'</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <hr class="divider d-none" />
+            <div class="filter-toggle">
+                <button class="btn-toggle filter-toggle" type="button" data-bs-target="#filters" data-bs-toggle="collapse" aria-expanded="false" aria-controls="filters">
+                    <img src="/Images/Icons/filter%2005.svg" class="filter-icon" /> <span class="filter-text">Filter</span>
+                </button>
+            </div>
+
+            <div class="collapse show" id="filters">
+                <CategoryFilterComponent SelectedCategory="@CatalogViewModel.SelectedCategory" CategoryChanged="@CatalogViewModel.HandleCategoryChanged" />
+                <PriceFilterComponent SelectedPriceRanges="@CatalogViewModel.SelectedPriceRanges" PricesChanged="@CatalogViewModel.HandlePricesChanged" />
+            </div>
+            <hr class="divider d-none" />
+        </div>
+
+        <div class="col-md-9">
+            <div class="row">
+                <ShopListComponent SelectedCategory="@CatalogViewModel.SelectedCategory"
+                                   Products="@CatalogViewModel.Products"
+                                   PaginationInfo="@CatalogViewModel.PaginationInfo"
+                                   PageChanged="@(async (newPage) => await CatalogViewModel.HandlePageChange(newPage))"
+                                   SortChanged="@(async (newSortBy) => await CatalogViewModel.HandleSortChange(newSortBy))" />
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        CatalogViewModel.PropertyChanged += HandleViewModelPropertyChanged;
+        await CatalogViewModel.LoadData(new CatalogQueryParametersModel()
+            {
+                Page = 1,
+                PageSize = CatalogViewModel.PageSize,
+                SortBy = CatalogViewModel.SelectedSortOrder,
+                PriceRanges = CatalogViewModel.SelectedPriceRanges,
+                Category = CatalogViewModel.SelectedCategory
+            });
+    }
+
+    private void HandleViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        StateHasChanged();
+    }
+}

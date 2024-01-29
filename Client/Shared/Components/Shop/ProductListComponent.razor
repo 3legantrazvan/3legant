@@ -1,0 +1,13 @@
+﻿@using _3legant.Shared.Models;
+@foreach (var product in Products)
+{
+    <ProductItemComponent ProductsModel="@product" />
+}
+
+<PaginationComponent PaginationInfoModel="@PaginationInfo" />
+
+@code {
+    [Parameter] public List<ProductModel> Products { get; set; }
+    [Parameter] public PaginationInfoModel PaginationInfo { get; set; }
+    [Parameter] public EventCallback<int> PageChanged { get; set; }
+}

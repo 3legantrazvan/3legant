@@ -1,0 +1,30 @@
+﻿@using Interfaces;
+@inject ICartRepository CartRepository
+
+<span class="badge rounded-pill bg-dark circular-pill">
+    @cartQuantity
+</span>
+
+@code {
+    private int cartQuantity;
+
+    protected override async Task OnInitializedAsync()
+    {
+        CartRepository.CartChanged += HandleCartChanged;
+        await UpdateCartQuantityAsync(); 
+
+        await base.OnInitializedAsync();
+    }
+
+    private void HandleCartChanged(int newCartQuantity)
+    {
+        cartQuantity = newCartQuantity;
+        StateHasChanged(); 
+    }
+
+    private async Task UpdateCartQuantityAsync()
+    {
+        cartQuantity = await CartRepository.GetCartQuantityAsync();
+        StateHasChanged(); 
+    }
+}

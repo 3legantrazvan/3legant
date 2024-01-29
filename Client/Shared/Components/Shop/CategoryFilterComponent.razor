@@ -1,0 +1,43 @@
+﻿@using Interfaces;
+@using System.ComponentModel;
+@using _3legant.Client.ViewModels.Catalog;
+@inherits ComponentBase
+@inject ICategoryFilterViewModel CategoryFilterViewModel
+
+<br />
+<div class="filter-container mt-2">
+    <h5 class="category-title">CATEGORIES </h5>
+
+    @foreach (var categoryOption in CategoryFilterViewModel.CategoryOptions)
+    {
+        <div class="mt-2">
+            <input name="category-filter" type="radio" id="@categoryOption" value="@categoryOption" checked="@categoryOption.Equals(CategoryFilterViewModel.SelectedCategory)" @onchange="() => OnCategoryChanged(categoryOption)" />
+            <label for="@categoryOption">@categoryOption</label>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public string SelectedCategory { get; set; }
+    [Parameter] public Action<string> CategoryChanged { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        CategoryFilterViewModel.PropertyChanged += HandleViewModelPropertyChanged;
+        CategoryFilterViewModel.Initialize();
+    }
+
+    private void HandleViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        StateHasChanged();
+    }
+
+    private async void OnCategoryChanged(string selectedCategory)
+    {
+        if (CategoryChanged != null)
+        {
+            SelectedCategory = selectedCategory;
+            CategoryChanged.Invoke(selectedCategory);
+        }
+    }
+}

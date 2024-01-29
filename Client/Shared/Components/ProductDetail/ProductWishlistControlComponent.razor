@@ -1,0 +1,37 @@
+﻿@using System.ComponentModel;
+@using _3legant.Client.ViewModels.Product;
+@using _3legant.Shared.Models;
+@using Interfaces;
+@inject IWishlistViewModel WishlistViewModel
+@inherits ComponentBase
+
+<button class="btn w-100 wishlist-button" @onclick="ToggleWishlist">
+    @if (@WishlistViewModel.IsAddedToWishlist)
+    {
+        <span><i class="bi bi-heart"/> Remove from Wishlist</span>
+    }
+    else
+    {
+        <span><i class="bi bi-heart"/> Add to Wishlist</span>
+    }
+</button>
+
+@code {
+    [Parameter] public int ProductId { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        WishlistViewModel.PropertyChanged += HandleViewModelPropertyChanged;
+        WishlistViewModel.ProductId = ProductId;
+        await WishlistViewModel.Initialize();
+    }
+
+    private void HandleViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        StateHasChanged();
+    }
+
+    private async Task ToggleWishlist()
+    {
+        await WishlistViewModel.ToggleWishlist();
+    }
+}

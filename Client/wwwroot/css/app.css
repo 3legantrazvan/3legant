@@ -1,0 +1,44 @@
+﻿body {
+    font-family: 'Inter', sans-serif;
+}
+
+.container {
+    max-width: 1120px;
+}
+
+h1, h2, h3, p {
+    font-family: 'Poppins', sans-serif;
+}
+
+.paragraph {
+    font-family: 'Inter';
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.title-500 {
+    font-size: 52px;
+    font-weight: 500;
+}
+
+.breadcrumbs {
+    color: #605F5F;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.breadcrumbs-active {
+    color: #121212;
+}
+
+@media (max-width: 767px) {
+    .title-500 {
+        font-size: 35px;
+        font-weight: 500;
+    }
+
+
+    .paragraph {
+        font-size: 16px;
+    }
+}

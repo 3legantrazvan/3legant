@@ -1,0 +1,13 @@
+﻿@using Interfaces;
+@inject ICartRepository CartRepository
+
+<button class="btn w-100 add-cart" @onclick="UpdateCartQuantity">Add to Cart</button>
+
+@code {
+
+    private async Task UpdateCartQuantity()
+    {
+        int cartQuantity = await CartRepository.GetCartQuantityAsync();
+        CartRepository.NotifyCartChanged(cartQuantity);
+    }
+}

@@ -1,0 +1,20 @@
+﻿.sort-dropdown select.form-select {
+    color: black;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+    .sort-dropdown select.form-select::-ms-expand {
+        display: none;
+    }
+
+    .sort-dropdown select.form-select::-moz-focus-inner {
+        border: 0;
+    }
+
+.sort-by-selection {
+    font-family: 'Inter';
+    font-weight: 600;
+    font-size: 16px;
+}

@@ -1,0 +1,29 @@
+﻿.filter-container input[type="radio"] {
+    display: none; 
+}
+
+.filter-container label {
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: 0px;
+    color: #807E7E;
+}
+
+.filter-container input[type="radio"]:checked + label {
+    text-decoration: underline;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: #121212;
+}
+
+.category-title {
+    font-family: Inter;
+    font-size:16px;
+    font-weight:600;
+}

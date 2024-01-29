@@ -1,0 +1,53 @@
+.mobile-nav {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    padding: 5px;
+    font-size: 10px;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23000000' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    background-size: 20px;
+    background-position: center;
+    color: transparent;
+}
+
+.menu-toggle {
+    border: none;
+    background-color: transparent;
+}
+
+span.logo {
+    vertical-align: middle;
+    padding-left: 11px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.navbar-brand {
+    font-family: 'Poppins';
+    font-weight: 500;
+    font-size: 24px;
+    color: #000000;
+}
+
+a.nav-link {
+    font-family: 'Space Grotesk'!important;
+    font-weight: 500!important;
+    font-size: 14px!important;
+    color: #141718!important;
+}
+
+@media (max-width: 767px) {
+    .cart-indicator {
+        position: absolute;
+        right: 0;
+        top: 10px;
+    }
+
+    .menu-toggle {
+        display: block !important;
+    }
+
+    a.navbar-brand {
+        display: none;
+    }
+}

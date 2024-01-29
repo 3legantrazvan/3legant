@@ -1,0 +1,49 @@
+﻿.new-tag {
+    position: absolute;
+    top: 8px;
+    left: 14px;
+    background: white;
+    padding: 0px 11px 0px 11px;
+    border-radius: 5px;
+    color: black;
+    font-weight: 600;
+    font-size: 15px;
+    text-align: center;
+}
+
+.discount-tag {
+    position: absolute;
+    top: 38px;
+    left: 15px;
+    background: #38CB89;
+    color: white;
+    padding: 0px 11px 0px 11px;
+    border-radius: 5px;
+    width: 56px;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+}
+
+img.star {
+    padding-right: 4px;
+    width: 15px;
+}
+
+.catalog-product-title {
+    font-family:'Inter';
+    font-weight:600;
+    font-size:16px;
+}
+
+.catalog-price {
+    font-family: 'Inter';
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.catalog-price-strike {
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 14px;
+}

@@ -1,0 +1,22 @@
+﻿.filter-toggle {
+    background: transparent;
+    border: none;
+}
+
+.filter-text {
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Inter';
+    vertical-align: middle;
+}
+
+.divider {
+    color: #8d8d8da3;
+    height: 1.5px;
+}
+
+@media (max-width: 767px) {
+    .divider {
+        display: block !important;
+    }
+}

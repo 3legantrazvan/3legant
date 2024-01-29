@@ -1,0 +1,49 @@
+﻿@using _3legant.Shared.Models;
+@inherits ComponentBase
+@inject NavigationManager NavigationManager
+
+<div class="col-md-4 pt-3 col-6" @onclick="NavigateToProductDetail">
+    <div class="card border-0">
+        <div class="card-body p-0">
+            <img class="w-100" src="@($"Images/Products/{ProductsModel.Image}")" />
+            @if (ProductsModel.IsProductNew)
+            {
+                <div class="new-tag">NEW</div>
+            }
+
+            @if (ProductsModel.DiscountPrice > 0)
+            {
+                <div class="discount-tag">-@((int)Math.Ceiling(((ProductsModel.Price / ProductsModel.DiscountPrice) / ProductsModel.Price) * 100))%</div>
+            }
+
+            <div class="review">
+                @for (int i = 0; i < ProductsModel.Rating; i++)
+                {
+                    <img class="star" src="@($"Images/Icons/star.png")" />
+                }
+            </div>
+            <h5 class="catalog-product-title">@ProductsModel.Title</h5>
+            <div class="price">
+                @if (ProductsModel.DiscountPrice == 0)
+                {
+                    <span class="catalog-price">
+                        @($"${ProductsModel.Price}")
+                    </span>
+                }
+                else
+                {
+                    <span class="catalog-price">@($"${ProductsModel.Price}")</span> <strike class="catalog-price-strike"> @($"${ProductsModel.DiscountPrice}")</strike>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public ProductModel ProductsModel { get; set; }
+
+    private void NavigateToProductDetail()
+    {
+        NavigationManager.NavigateTo($"/product/{ProductsModel.Id}");
+    }
+}

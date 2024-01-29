@@ -1,0 +1,67 @@
+﻿@using _3legant.Shared.Models;
+@inherits ComponentBase
+
+@if (PaginationInfoModel != null && PaginationInfoModel.TotalPages > 1)
+{
+    <nav class="pt-4">
+        <ul class="pagination pagination-sm">
+            <li class="page-item @(IsPreviousButtonDisabled() ? "disabled" : "")">
+                <a class="page-link" href="javascript:void(0);" disabled="@IsPreviousButtonDisabled()" @onclick="PreviousPage">Previous</a>
+            </li>
+            @for (int i = Math.Max(1, PaginationInfoModel.CurrentPage - 2); i <= Math.Min(PaginationInfoModel.TotalPages, PaginationInfoModel.CurrentPage + 2); i++)
+            {
+                int currentPage = i;
+                <li class="page-item @(IsCurrentPage(currentPage) ? "active" : "")">
+                    <a class="page-link" href="javascript:void(0);" disabled="@IsCurrentPage(currentPage)" @onclick="() => ChangePage(currentPage)">@i</a>
+                </li>
+            }
+            <li class="page-item @(IsNextButtonDisabled() ? "disabled" : "")">
+                <a class="page-link" href="javascript:void(0);" disabled="@IsNextButtonDisabled()" @onclick="NextPage">Next</a>
+            </li>
+        </ul>
+    </nav>
+}
+
+@code {
+    [Parameter] public PaginationInfoModel PaginationInfoModel { get; set; }
+    [Parameter] public EventCallback<int> PageChanged { get; set; }
+
+    private bool IsCurrentPage(int page)
+    {
+        return page == PaginationInfoModel.CurrentPage;
+    }
+
+    private bool IsPreviousButtonDisabled()
+    {
+        return PaginationInfoModel.CurrentPage == 1;
+    }
+
+    private bool IsNextButtonDisabled()
+    {
+        return PaginationInfoModel.CurrentPage == PaginationInfoModel.TotalPages;
+    }
+
+    private async Task PreviousPage()
+    {
+        if (!IsPreviousButtonDisabled())
+        {
+            await PageChanged.InvokeAsync(PaginationInfoModel.CurrentPage - 1);
+        }
+    }
+
+    private async Task NextPage()
+    {
+        if (!IsNextButtonDisabled())
+        {
+            await PageChanged.InvokeAsync(PaginationInfoModel.CurrentPage + 1);
+        }
+    }
+
+    private async Task ChangePage(int page)
+    {
+        if (!IsCurrentPage(page))
+        {
+            await PageChanged.InvokeAsync(page);
+        }
+    }
+}

@@ -1,0 +1,41 @@
+﻿@using System.ComponentModel;
+@using _3legant.Client.ViewModels.Catalog;
+@using _3legant.Shared.Models;
+@using Interfaces;
+@inherits ComponentBase
+@inject IPriceFilterViewModel PriceFilterViewModel
+
+<br />
+<div class="filter-container">
+    <h5 class="price-title">PRICE </h5>
+    @foreach (var priceOption in PriceFilterViewModel.PriceOptions)
+    {
+        <div class="mt-2">
+            <label for="@priceOption.Value">@priceOption.Text</label>
+            <input type="checkbox" id="@priceOption.Value" value="@priceOption.Value" checked="@priceOption.Selected" @onchange="() => OnPriceOptionChanged(priceOption)" />
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public List<string> SelectedPriceRanges { get; set; }
+    [Parameter] public Action<List<string>> PricesChanged { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        PriceFilterViewModel.PropertyChanged += HandleViewModelPropertyChanged;
+        PriceFilterViewModel.InitializeAsync();
+    }
+
+    private void OnPriceOptionChanged(OptionsModel priceOption)
+    {
+        PriceFilterViewModel.OnPriceOptionChanged(priceOption);
+        SelectedPriceRanges = PriceFilterViewModel.SelectedPriceRanges;
+        PricesChanged?.Invoke(SelectedPriceRanges);
+    }
+
+    private void HandleViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        StateHasChanged();
+    }
+}
