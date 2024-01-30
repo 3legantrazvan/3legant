@@ -7,8 +7,8 @@ namespace Interfaces
     {
         public Task<ProductsResponseModel> GetProducts(CatalogQueryParametersModel catalogQueryParametersModel);
         public Task<ProductModel> GetProductById(int ProductId);
-        public Task<List<OptionsModel>> GetPriceRangeFilters();
-        public Task<List<string>> GetCategoryFilters();
-        public Task<List<SortOptionModel>> GetSortObtions();
+        public Task<IList<OptionsModel>> GetPriceRangeFilters();
+        public Task<IList<string>> GetCategoryFilters();
+        public Task<IList<SortOptionModel>> GetSortObtions();
     }
 }

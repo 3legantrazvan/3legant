@@ -5,7 +5,7 @@ namespace _3legant.Server.Interfaces
 {
     public interface IShopService
     {
-        public Task<List<ProductModel>> GetProducts(CatalogQueryParametersModel catalogQueryParametersModel);
+        public Task<IList<ProductModel>> GetProducts(CatalogQueryParametersModel catalogQueryParametersModel);
         public Task<int> GetTotalPages(CatalogQueryParametersModel catalogQueryParametersModel);
         public Task<ProductModel> GetProductById(int ProductId);
     }

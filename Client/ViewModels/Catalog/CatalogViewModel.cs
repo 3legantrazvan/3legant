@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using _3legant.Shared.Models;
+using _3legant.Shared.Utils;
 using Interfaces;
 
 namespace ViewModels.Catalog
@@ -9,12 +10,12 @@ namespace ViewModels.Catalog
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private List<ProductModel> _products;
+        private IList<ProductModel> _products;
         private PaginationInfoModel _paginationInfo;
         private int _pageSize;
         private string _selectedSortOrder;
         private string _selectedCategory;
-        private List<string> _selectedPriceRanges;
+        private IList<string> _selectedPriceRanges;
         private readonly ICatalogService _catalogService;
 
         public CatalogViewModel(ICatalogService catalogService)
@@ -23,9 +24,9 @@ namespace ViewModels.Catalog
             Products = new List<ProductModel>();
             PaginationInfo = new PaginationInfoModel();
             PageSize = 10;
-            SelectedSortOrder = "PriceLowToHigh";
-            SelectedCategory = "All Rooms";
-            SelectedPriceRanges = new List<string> { "All Price" };
+            SelectedSortOrder = CatalogSortConstants.PriceLowToHigh;
+            SelectedCategory = CatalogConstants.AllRooms;
+            SelectedPriceRanges = new List<string> { CatalogConstants.AllPrice };
         }
 
        
@@ -34,7 +35,7 @@ namespace ViewModels.Catalog
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public List<ProductModel> Products
+        public IList<ProductModel> Products
         {
             get => _products;
             set
@@ -99,7 +100,7 @@ namespace ViewModels.Catalog
             }
         }
 
-        public List<string> SelectedPriceRanges
+        public IList<string> SelectedPriceRanges
         {
             get => _selectedPriceRanges;
             set
@@ -153,7 +154,7 @@ namespace ViewModels.Catalog
             });
         }
 
-        public async void HandlePricesChanged(List<string> newPriceRanges)
+        public async void HandlePricesChanged(IList<string> newPriceRanges)
         {
             SelectedPriceRanges = newPriceRanges;
             await LoadData(new CatalogQueryParametersModel()

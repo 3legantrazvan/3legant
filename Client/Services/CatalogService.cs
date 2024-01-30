@@ -27,35 +27,26 @@ namespace _3legant.Client.Services
             return response;
         }
 
-        public async Task<List<OptionsModel>> GetPriceRangeFilters()
+        public async Task<IList<OptionsModel>> GetPriceRangeFilters()
         {
-            var response = await _httpClient.GetFromJsonAsync<List<OptionsModel>>($"{_catalogBaseRoute}/PriceRangeFilter") ?? new List<OptionsModel>();
+            var response = await _httpClient.GetFromJsonAsync<IList<OptionsModel>>($"{_catalogBaseRoute}/PriceRangeFilter") ?? new List<OptionsModel>();
             return response;
         }
 
-        public async Task<List<string>> GetCategoryFilters()
+        public async Task<IList<string>> GetCategoryFilters()
         {
-            var response = await _httpClient.GetFromJsonAsync<List<string>>($"{_catalogBaseRoute}/CategoriesFilter") ?? new List<string>();
+            var response = await _httpClient.GetFromJsonAsync<IList<string>>($"{_catalogBaseRoute}/CategoriesFilter") ?? new List<string>();
             return response;
         }
 
-        public async Task<List<SortOptionModel>> GetSortObtions()
+        public async Task<IList<SortOptionModel>> GetSortObtions()
         {
-            var response = await _httpClient.GetFromJsonAsync<List<SortOptionModel>>($"{_catalogBaseRoute}/SortOptions") ?? new List<SortOptionModel>();
+            var response = await _httpClient.GetFromJsonAsync<IList<SortOptionModel>>($"{_catalogBaseRoute}/SortOptions") ?? new List<SortOptionModel>();
             return response;
         }
 
         private string BuildQueryString(CatalogQueryParametersModel catalogQueryParametersModel)
         {
-
-            if (!catalogQueryParametersModel.PriceRanges.Any())
-            {
-                catalogQueryParametersModel.PriceRanges = new List<string>()
-                {
-                    "00.00-"+decimal.MaxValue
-                };
-            }
-
             var parameters = new List<string>
                 {
                     $"Page={catalogQueryParametersModel.Page}",

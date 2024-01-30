@@ -6,6 +6,6 @@
         public int PageSize { get; set; }
         public string SortBy { get; set; }
         public string Category { get; set; }
-        public List<string> PriceRanges { get; set; }
+        public IList<string> PriceRanges { get; set; }
     }
 }

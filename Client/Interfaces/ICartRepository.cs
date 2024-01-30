@@ -4,8 +4,8 @@ namespace Interfaces
 {
     public interface ICartRepository
     {
-        Task<List<CartItemModel>> GetCartAsync();
-        Task UpdateCartAsync(List<CartItemModel> cart);
+        Task<IList<CartItemModel>> GetCartAsync();
+        Task UpdateCartAsync(IList<CartItemModel> cart);
         Task<int> GetCartQuantityAsync();
         event Action<int> CartChanged;
         void NotifyCartChanged(int cartQuantity);

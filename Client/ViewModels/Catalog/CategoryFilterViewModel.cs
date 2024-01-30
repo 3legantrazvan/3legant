@@ -1,4 +1,5 @@
-﻿using Interfaces;
+﻿using _3legant.Shared.Utils;
+using Interfaces;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -9,17 +10,17 @@ namespace _3legant.Client.ViewModels.Catalog
         public event PropertyChangedEventHandler PropertyChanged;
 
         private readonly ICatalogService _catalogService;
-        private List<string> _categoryOptions;
+        private IList<string> _categoryOptions;
         private string _selectedCategory;
 
         public CategoryFilterViewModel(ICatalogService catalogService)
         {
             _catalogService = catalogService;
             _categoryOptions = new List<string>();
-            _selectedCategory = "All Rooms";
+            _selectedCategory = CatalogConstants.AllRooms;
         }
 
-        public List<string> CategoryOptions
+        public IList<string> CategoryOptions
         {
             get => _categoryOptions;
             set

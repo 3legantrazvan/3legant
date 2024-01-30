@@ -36,7 +36,7 @@ namespace _3legant.Server.Controllers
         }
 
         [HttpGet("PriceRangeFilter")]
-        public async Task<ActionResult<List<OptionsModel>>> PriceRangeFilter()
+        public async Task<ActionResult<IList<OptionsModel>>> PriceRangeFilter()
         {
             var _priceOptions = new List<OptionsModel>()
                     {
@@ -51,7 +51,7 @@ namespace _3legant.Server.Controllers
         }
 
         [HttpGet("CategoriesFilter")]
-        public ActionResult<List<string>> CategoriesFilter()
+        public ActionResult<IList<string>> CategoriesFilter()
         {
             var _categoryOptions = new List<string>
                     {
@@ -61,7 +61,7 @@ namespace _3legant.Server.Controllers
         }
 
         [HttpGet("SortOptions")]
-        public ActionResult<List<SortOptionModel>> SortOptions()
+        public ActionResult<IList<SortOptionModel>> SortOptions()
         {
             var _sortOptions = new List<SortOptionModel>
             {

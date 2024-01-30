@@ -76,9 +76,10 @@ namespace _3legantTest
                         new OptionsModel { Value = "400-"+decimal.MaxValue, Text = "$400.00+" },
                     };
 
+            IList<OptionsModel> result = priceOptions;
             catalogServiceMock
                 .Setup(x => x.GetPriceRangeFilters())
-                .Returns(Task.FromResult(priceOptions));
+                .Returns(Task.FromResult(result));
 
             var priceFilterViewModel = new PriceFilterViewModel(catalogServiceMock.Object);
 
@@ -101,10 +102,11 @@ namespace _3legantTest
                              new SortOptionModel { Value = "NameAZ", Text = "Name A-Z" },
                              new SortOptionModel { Value = "NameZA", Text = "Name Z-A" },
                         };
+            IList<SortOptionModel> sortOptionModels = sortOptions;
 
             sortServiceMock
                 .Setup(x => x.GetSortObtions())
-                .Returns(Task.FromResult(sortOptions));
+                .Returns(Task.FromResult(sortOptionModels));
 
             var sortByViewModel = new SortByViewModel(sortServiceMock.Object);
 

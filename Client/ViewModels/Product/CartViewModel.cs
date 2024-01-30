@@ -1,7 +1,6 @@
 ﻿using _3legant.Shared.Models;
 using Interfaces;
 using Microsoft.AspNetCore.Components;
-using Repositories;
 using System.ComponentModel;
 
 namespace _3legant.Client.ViewModels.Product
@@ -9,7 +8,7 @@ namespace _3legant.Client.ViewModels.Product
     public class CartViewModel : ICartViewModel
     {
         private ICartRepository _cartRepository;
-        private List<CartItemModel> _cart;
+        private IList<CartItemModel> _cart;
         private int _productId;
         private int _cartQuantity;
 
@@ -21,7 +20,7 @@ namespace _3legant.Client.ViewModels.Product
             _cartRepository = cartRepository;
         }
 
-        public List<CartItemModel> Cart
+        public IList<CartItemModel> Cart
         {
             get => _cart;
             set

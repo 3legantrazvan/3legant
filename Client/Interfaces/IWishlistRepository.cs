@@ -4,8 +4,8 @@ namespace Interfaces
 {
     public interface IWishlistRepository
     {
-        Task<List<WishlistItemModel>> GetWishlistAsync();
-        Task UpdateWishlistAsync(List<WishlistItemModel> Wishlist);
+        Task<IList<WishlistItemModel>> GetWishlistAsync();
+        Task UpdateWishlistAsync(IList<WishlistItemModel> Wishlist);
         Task<bool> IsProductInWishlist(int ProductId);
         Task AddToWishlistAsync(WishlistItemModel WishlistItem);
         Task RemoveFromWishlistAsync(int ProductId);

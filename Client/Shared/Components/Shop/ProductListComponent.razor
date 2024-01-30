@@ -7,7 +7,7 @@
 <PaginationComponent PaginationInfoModel="@PaginationInfo" />
 
 @code {
-    [Parameter] public List<ProductModel> Products { get; set; }
+    [Parameter] public IList<ProductModel> Products { get; set; }
     [Parameter] public PaginationInfoModel PaginationInfo { get; set; }
     [Parameter] public EventCallback<int> PageChanged { get; set; }
 }

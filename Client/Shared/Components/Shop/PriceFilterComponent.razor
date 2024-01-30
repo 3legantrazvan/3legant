@@ -18,8 +18,8 @@
 </div>
 
 @code {
-    [Parameter] public List<string> SelectedPriceRanges { get; set; }
-    [Parameter] public Action<List<string>> PricesChanged { get; set; }
+    [Parameter] public IList<string> SelectedPriceRanges { get; set; }
+    [Parameter] public Action<IList<string>> PricesChanged { get; set; }
 
     protected override async Task OnInitializedAsync()
     {

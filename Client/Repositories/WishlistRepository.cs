@@ -14,12 +14,12 @@ namespace Repositories
             _localStorage = localStorage;
         }
 
-        public async Task<List<WishlistItemModel>> GetWishlistAsync()
+        public async Task<IList<WishlistItemModel>> GetWishlistAsync()
         {
-            return await _localStorage.GetItemAsync<List<WishlistItemModel>>(WishlistKey) ?? new List<WishlistItemModel>();
+            return await _localStorage.GetItemAsync<IList<WishlistItemModel>>(WishlistKey) ?? new List<WishlistItemModel>();
         }
 
-        public async Task UpdateWishlistAsync(List<WishlistItemModel> Wishlist)
+        public async Task UpdateWishlistAsync(IList<WishlistItemModel> Wishlist)
         {
             await _localStorage.SetItemAsync(WishlistKey, Wishlist);
         }

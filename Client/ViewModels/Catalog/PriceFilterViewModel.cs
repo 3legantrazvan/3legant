@@ -1,6 +1,6 @@
 ﻿using _3legant.Shared.Models;
+using _3legant.Shared.Utils;
 using Interfaces;
-using Microsoft.AspNetCore.Components;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -10,8 +10,8 @@ namespace _3legant.Client.ViewModels.Catalog
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private ICatalogService _catalogService;
-        private List<OptionsModel> _priceOptions = new List<OptionsModel>();
-        private List<string> _selectedPriceRanges;
+        private IList<OptionsModel> _priceOptions = new List<OptionsModel>();
+        private IList<string> _selectedPriceRanges;
 
         public PriceFilterViewModel(ICatalogService catalogService)
         {
@@ -20,7 +20,7 @@ namespace _3legant.Client.ViewModels.Catalog
             _selectedPriceRanges = new List<string>();
         }
 
-        public List<string> SelectedPriceRanges
+        public IList<string> SelectedPriceRanges
         {
             get => _selectedPriceRanges;
             set
@@ -33,7 +33,7 @@ namespace _3legant.Client.ViewModels.Catalog
             }
         }
 
-        public List<OptionsModel> PriceOptions
+        public IList<OptionsModel> PriceOptions
         {
             get => _priceOptions;
             set
@@ -49,11 +49,12 @@ namespace _3legant.Client.ViewModels.Catalog
         public async Task InitializeAsync()
         {
             PriceOptions = await _catalogService.GetPriceRangeFilters();
+            SelectedPriceRanges = new List<string>();
         }
 
         public void OnPriceOptionChanged(OptionsModel priceOption)
         {
-            if (priceOption.Text == "All Price" && priceOption.Selected)
+            if (priceOption.Text == CatalogConstants.AllPrice && priceOption.Selected)
             {
                 foreach (var option in PriceOptions.Where(o => o != priceOption))
                 {
@@ -62,7 +63,7 @@ namespace _3legant.Client.ViewModels.Catalog
             }
             else
             {
-                var allPriceOption = PriceOptions.First(o => o.Text == "All Price");
+                var allPriceOption = PriceOptions.First(o => o.Text == CatalogConstants.AllPrice);
                 allPriceOption.Selected = false;
             }
 

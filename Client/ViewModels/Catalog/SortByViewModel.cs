@@ -1,5 +1,4 @@
-﻿using _3legant.Client.Services;
-using _3legant.Shared.Models;
+﻿using _3legant.Shared.Models;
 using Interfaces;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -12,7 +11,7 @@ namespace _3legant.Client.ViewModels.Catalog
         private readonly ICatalogService _catalogService;
 
         private string _selectedSort;
-        private List<SortOptionModel> _sortOptions;
+        private IList<SortOptionModel> _sortOptions;
 
         public SortByViewModel(ICatalogService catalogService)
         {
@@ -34,7 +33,7 @@ namespace _3legant.Client.ViewModels.Catalog
             }
         }
 
-        public List<SortOptionModel> SortOptions
+        public IList<SortOptionModel> SortOptions
         {
             get { return _sortOptions; }
             set

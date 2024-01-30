@@ -6,7 +6,7 @@ namespace _3legant.Client.ViewModels.Catalog
     public interface ISortByViewModel : INotifyPropertyChanged
     {
         string SelectedSort { get; set; }
-        List<SortOptionModel> SortOptions { get; set; }
+        IList<SortOptionModel> SortOptions { get; set; }
         Task Initialize();
     }
 }

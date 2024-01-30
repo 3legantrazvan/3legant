@@ -4,7 +4,7 @@ namespace _3legant.Server.Models
 {
     public class ProductsResponseModel
     {
-        public List<ProductModel> Products { get; set; }
+        public IList<ProductModel> Products { get; set; }
         public PaginationInfoModel PaginationInfo { get; set; }
     }
 }

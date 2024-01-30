@@ -21,12 +21,12 @@ namespace Repositories
             _localStorage = localStorage;
         }
 
-        public async Task<List<CartItemModel>> GetCartAsync()
+        public async Task<IList<CartItemModel>> GetCartAsync()
         {
-            return await _localStorage.GetItemAsync<List<CartItemModel>>(CartKey) ?? new List<CartItemModel>();
+            return await _localStorage.GetItemAsync<IList<CartItemModel>>(CartKey) ?? new List<CartItemModel>();
         }
 
-        public async Task UpdateCartAsync(List<CartItemModel> cart)
+        public async Task UpdateCartAsync(IList<CartItemModel> cart)
         {
             await _localStorage.SetItemAsync(CartKey, cart);
         }

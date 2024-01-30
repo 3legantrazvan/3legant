@@ -30,7 +30,7 @@ else
 
 @code {
     [Parameter] public string SelectedSort { get; set; }
-    [Parameter] public List<ProductModel> Products { get; set; }
+    [Parameter] public IList<ProductModel> Products { get; set; }
     [Parameter] public PaginationInfoModel PaginationInfo { get; set; }
     [Parameter] public EventCallback<int> PageChanged { get; set; }
     [Parameter] public EventCallback<string> SortChanged { get; set; }
